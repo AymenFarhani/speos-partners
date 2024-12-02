@@ -13,8 +13,17 @@ class PartnerController extends RestfulController<Partner> {
         super(Partner)
     }
 
-    def getPartners() {def partners = partnerService.getPartners()
-        render partners
+    def getPartners() {
+        int max = params.int('max') ?: 5
+        int offset = params.int('offset') ?: 0
+
+        // Fetch paginated results
+        def partners = partnerService.getPartners(params)
+        def totalPartnersCount = Partner.count()
+
+        // Create a JSON response
+         def response = [partners: partners, total: totalPartnersCount, max: max, offset: offset]
+        render (response as JSON)
     }
 
     def getPartnerById(Long id) {

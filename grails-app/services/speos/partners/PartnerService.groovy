@@ -1,15 +1,15 @@
 package speos.partners
 
-import grails.converters.JSON
 import grails.gorm.transactions.Transactional
 import grails.validation.ValidationException
+import grails.web.servlet.mvc.GrailsParameterMap
 
 @Transactional
 class PartnerService {
 
-    def getPartners() {
-        def partners = Partner.list()
-        return ([partners: partners]) as JSON
+    def getPartners(GrailsParameterMap params) {
+        List<Partner> partners = Partner.list(params)
+        return partners
     }
 
     def getPartnerById(Long id) {
