@@ -1,9 +1,10 @@
 package speos.partners
 
 import grails.validation.Validateable
+import org.grails.datastore.gorm.GormEntity
 
 
-class Partner implements Validateable{
+class Partner implements Validateable, GormEntity<Partner>{
 
     Long id
     String name

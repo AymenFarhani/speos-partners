@@ -21,10 +21,10 @@ class PartnerControllerSpec extends Specification implements ControllerUnitTest<
         given:
         def partners = [new Partner(name: "Test Company", reference: "TC123", locale: Locale.ENGLISH, expirationTime: new Date()),
                         new Partner(name: "Test Company2", reference: "TC124", locale: Locale.ENGLISH, expirationTime: new Date())]
-        partnerService.getPartners(10,0) >> partners
+        partnerService.getPartners(5,0) >> partners
 
         when:
-        controller.getPartners(10,0)
+        controller.getPartners()
 
         then:
         response.status == 200
